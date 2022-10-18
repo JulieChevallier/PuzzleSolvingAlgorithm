@@ -4,7 +4,6 @@
 
 ### IUT Montpellier-Sète – Département Informatique
 
-* [**Support de cours**](https://gitlabinfo.iutmontp.univ-montp2.fr/dev-objets/Ressources)
 * **Enseignants:**
   [Marin Bougeret](mailto:marin.bougeret@umontpellier.fr),
   [Gaëlle Hisler](mailto:gaelle.hisler@umontpellier.fr),<!--[Sophie Nabitz](mailto:sophie.nabitz@univ-avignon.fr),-->
@@ -12,19 +11,6 @@
   [Victor Poupet](mailto:victor.poupet@umontpellier.fr),
   [Gilles Trombettoni](mailto:gilles.trombettoni@umontpellier.fr),
   [Petru Valicov](mailto:petru.valicov@umontpellier.fr)
-* Le [forum Piazza](https://piazza.com/class/kyo4oooauez252) de ce cours pour poser vos questions
-* [Email](mailto:petru.valicov@umontpellier.fr) pour une question d'ordre privée concernant le cours.
-* Le [sujet du TP](https://www.lirmm.fr/~pvalicov/Cours/dev-objets/TP6.pdf) en format .pdf téléchargeable et imprimable.
-
-<!--Avant de démarrer le TP, vérifiez que vous n'avez pas atteint votre quota d'espace de stockage autorisé :
-
-* placez-vous dans votre `$HOME` et utilisez les commandes suivantes :
-    * `du -sh` pour voir combien d'espace vous avez déjà utilisé
-    * `du -sh *` pour voir combien d'espace vous avez déjà utilisé pour chaque fichier (sans fichiers cachés)
-    * `du -sch .[!.]* *` pour voir combien d'espace vous avez déjà utilisé pour chaque fichier, y compris les fichiers cachés
-* Supprimez les fichiers inutiles.
-* Pour éviter des problèmes durant vos TPs d'informatique, vous devriez toujours **garder 300-400 Mo d'espace libre**.
--->
 
 ## TP
 #### _Thème : Puzzle solving algorithm
@@ -272,3 +258,33 @@ différemment, et dont les implémentations pourront être interchangées "à la
     **Remarque :** Votre algorithme risque d'être lent si la grille est trop grande ou peu remplie. C'est normal, car il s'agit d'une exploration exhaustive de l'espace de recherche. Il n'y a pas de magie. Dans vos tests, utilisez donc en priorité des petites grilles ($`4 \times 4`$) et ensuite des grilles $`9 \times 9`$ qui ont beaucoup de cases remplies.
 
 9. Pour ce programme de Sudoku implantant `genererFils()` comme demandé ci-dessus, le test d'appartenance d'un nouveau fils à l'ensemble `dejaVus` n'est pas utile. Pourquoi ? Que faudrait-il changer à la classe `JeuPuzzle` pour pouvoir prendre en compte ce type de jeu ?
+
+### Partie 3 - collections
+#### Exercice 1
+
+Vous avez sans doute remarqué que la résolution des différentes configurations du Taquin (et même Hanoi) est assez lente. Le but de cet exercice est d'améliorer les temps d'exécution de vos algorithmes en choisissant mieux les structures de données, appelées **collections** en _Java_. Pour ce faire, il faut absolument étudier le [cours sur les collections Java](https://www.lirmm.fr/~pvalicov/Cours/dev-objets/Genericite_Structures_de_Donnees_x4.pdf) et lire la documentation dans la littérature ou sur le site d'Oracle. Voici une liste non exhaustive des différentes classes et interfaces que vous devriez connaître après avoir travaillé sur le cours (et le [projet](https://gitlabinfo.iutmontp.univ-montp2.fr/dev-objets/aventuriers-du-rail) !) :
+[Collection](https://docs.oracle.com/javase/8/docs/api/java/util/Collection.html),
+[Collections](https://docs.oracle.com/javase/8/docs/api/java/util/Collections.html),
+[List](https://docs.oracle.com/javase/8/docs/api/java/util/List.html),
+[ArrayList](https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html),
+[LinkedList](https://docs.oracle.com/javase/8/docs/api/java/util/LinkedList.html),
+[Set](https://docs.oracle.com/javase/8/docs/api/java/util/Set.html),
+[HashSet](https://docs.oracle.com/javase/8/docs/api/java/util/HashSet.html),
+[TreeSet](https://docs.oracle.com/javase/8/docs/api/java/util/TreeSet.html),
+[LinkedHashSet](https://docs.oracle.com/javase/8/docs/api/java/util/LinkedHashSet.html),
+[Queue](https://docs.oracle.com/javase/8/docs/api/java/util/Queue.html),
+[Deque](https://docs.oracle.com/javase/8/docs/api/java/util/Deque.html),
+[PriorityQueue](https://docs.oracle.com/javase/8/docs/api/java/util/PriorityQueue.html),
+[Map](https://docs.oracle.com/javase/8/docs/api/java/util/Map.html),
+[HashMap](https://docs.oracle.com/javase/8/docs/api/java/util/HashMap.html),
+[TreeMap](https://docs.oracle.com/javase/8/docs/api/java/util/TreeMap.html), etc.
+
+1. Copiez dans le répertoire `src/main/java` l'ensemble des classes et interfaces métiers créées dans la [Partie 2 du TP6](https://gitlabinfo.iutmontp.univ-montp2.fr/dev-objets/TP6#partie-2-cr%C3%A9ation-dun-framework-de-r%C3%A9solution-de-puzzle). Également, copiez dans le répertoire `src/test/java` l'ensemble de classes de tests. Vérifiez que votre programme principal fonctionne correctement. Pensez à mettre toutes ces classes dans un package approprié. Par exemple `fr.umontpellier.iut` si vous comptez vous arrêtez à l'implémentation des algorithmes de résolution; et `fr.umontpellier.iut.framework` ou `fr.umontpellier.iut.traitement` si vous voulez ajouter d'autres composants (comme une interface graphique que vous mettriez dans `fr.umontpellier.iut.affichage`).
+
+   **Rappel important** : Le code de votre projet TP6 doit rester intact, seuls les fichiers du TP7 peuvent être modifiés.
+
+2. Observez que jusque-là vous avez utilisée les `ArrayList` de _Java_ pour modéliser les variables `dejaVus`, `frontiere`, ainsi que les fils d'une configuration de jeu donnée (retournés par la méthode `genererFils()` de `JeuPuzzle`). Réfléchissez aux inconvénients de cette structure de données, notamment lorsqu'on ajoute un élément dans `dejaVus` ou `frontiere` ? Est-ce qu'une `ArrayList` est pertinente ici, ou choisir une autre collection _Java_ serait plus approprié pour votre algorithme ?
+
+3. Rappelez-vous la spécification de la variable `dejaVus` et notez le test d'appartenance à `dejaVus` dans la méthode `mettreAJour(...)` de la classe `Couple`. De manière directe ou indirecte, pour les `ArrayList` ce test d'appartenance se fait en utilisant la méthode `boolean equals(Object o)` redéfinie dans vos classes `Taquin`, `Hanoi` et `Sudoku`. Proposez une collection plus appropriée pour modéliser la variable `dejaVus` et modifiez (i.e. refactorisez) votre code de manière correspondante. Justifiez votre choix dans le fichier **reponses.md**.
+
+4. Après avoir fait les changements nécessaires, essayez de résoudre les taquins 3 X 3, qui étaient auparavant particulièrement lents et vérifiez si vous obtenez des améliorations des temps de calcul. De même essayez de voir les améliorations pour le Sudoku et Hanoi.
